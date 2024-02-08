@@ -27,12 +27,13 @@ from libtmux.neo import Obj, fetch_obj, fetch_objs
 from libtmux.pane import Pane
 
 from . import exc
-from .common import PaneDict, WindowOptionDict, handle_option_error
+from .options import handle_option_error
 
 if t.TYPE_CHECKING:
     import sys
     import types
 
+    from .common import PaneDict, WindowOptionDict
     from .server import Server
     from .session import Session
 

@@ -18,6 +18,7 @@ import warnings
 from libtmux._internal.query_list import QueryList
 from libtmux.common import tmux_cmd
 from libtmux.constants import OptionScope
+from libtmux.hooks import HooksMixin
 from libtmux.neo import fetch_objs
 from libtmux.pane import Pane
 from libtmux.session import Session
@@ -48,7 +49,11 @@ if t.TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class Server(EnvironmentMixin, OptionsMixin):
+class Server(
+    EnvironmentMixin,
+    OptionsMixin,
+    HooksMixin,
+):
     """:term:`tmux(1)` :term:`Server` [server_manual]_.
 
     - :attr:`Server.sessions` [:class:`Session`, ...]
@@ -123,6 +128,8 @@ class Server(EnvironmentMixin, OptionsMixin):
 
     default_option_scope: OptionScope | None = OptionScope.Server
     """For option management."""
+    default_hook_scope: OptionScope | None = OptionScope.Server
+    """For hook management."""
 
     def __init__(
         self,
